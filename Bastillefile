@@ -1,3 +1,5 @@
+ARG SSH_PORT
+
 INCLUDE https://github.com/s-daveb/ip6jail.template.git
 
 CMD mkdir -pv /usr/local/etc/bastille 2> /dev/null
