@@ -1,12 +1,12 @@
 ARG SSH_PORT
 
-INCLUDE https://github.com/s-daveb/ip6jail.template.git
+INCLUDE https://github.com/s-daveb/ip6jail.template
 
 CMD mkdir -pv /usr/local/etc/bastille 2> /dev/null
 CMD mkdir -pv /usr/local/etc/lighttpd/ssl 2> /dev/null
 CMD mkdir -pv  /usr/local/www/data 2> /dev/null
 
-PKG lighthttpd
+PKG lighttpd
 
 SYSRC lighttpd_enable=\"YES\"
 SYSRC lighttpd_instances=\"proxy\"
