@@ -1,22 +1,14 @@
+INCLUDE https://github.com/s-daveb/ip6jail.template.git
 
-ARG SSH_PORT
+CMD mkdir -pv /usr/local/etc/bastille 2> /dev/null
+CMD mkdir -pv /usr/local/etc/lighttpd/ssl 2> /dev/null
+CMD mkdir -pv  /usr/local/www/data 2> /dev/null
 
-CP root /
-CP etc /
+PKG lighthttpd
 
-RENDER /etc/rc.conf.local
-RENDER /etc/ssh/sshd_config
+SYSRC lighttpd_enable=\"YES\"
+SYSRC lighttpd_instances=\"proxy\"
+SYSRC lighttpd_proxy_conf=\"/usr/local/etc/lighttpd-proxy.conf\"
+SYSRC lighttpd_proxy_pidfile=\"/var/run/http-proxy.pid\"
 
-
-CMD ssh-keygen -A
-SERVICE routing stop
-SERVICE netif restart
-SERVICE routing restart
-
-PKG bootstrap
-
-SERVICE sshd restart
-
-PKG git vim mosh 
-
-CMD ifconfig vnet0 | grep inet6
+SERVICE lighttpd restart
