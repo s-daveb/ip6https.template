@@ -2,19 +2,14 @@ ARG SSH_PORT
 ARG DOMAIN
 ARG CERTBOT_EMAIL
 
-
 INCLUDE https://github.com/s-daveb/ip6jail.template
 
 CP usr /
 RENDER /usr/local/etc/lighttpd-proxy.conf
+
 PKG lighttpd py39-certbot
 
-SYSRC lighttpd_enable=\"YES\"
-SYSRC lighttpd_instances=\"proxy\"
-SYSRC lighttpd_proxy_conf=\"/usr/local/etc/lighttpd-proxy.conf\"
-SYSRC lighttpd_proxy_pidfile=\"/var/run/http-proxy.pid\"
-
-CMD cergbot register -m ${CERBOT_EMAIL} --agree-tos 
+CMD certbot register -m ${CERTBOT_EMAIL} --agree-tos 
 CMD certbot certonly --standalone --domains ${DOMAIN}
 
 SERVICE lighttpd restart
