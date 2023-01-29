@@ -1,14 +1,12 @@
 ARG SSH_PORT
+ARG FQDN 
 
-CP usr /
 
 INCLUDE https://github.com/s-daveb/ip6jail.template
 
-CMD mkdir -pv /usr/local/etc/bastille 2> /dev/null
-CMD mkdir -pv /usr/local/etc/lighttpd/ssl 2> /dev/null
-CMD mkdir -pv  /usr/local/www/data 2> /dev/null
+CP usr /
 
-PKG lighttpd
+PKG lighttpd py39-certbot
 
 SYSRC lighttpd_enable=\"YES\"
 SYSRC lighttpd_instances=\"proxy\"
