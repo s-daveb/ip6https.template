@@ -4,6 +4,7 @@ ARG CERTBOT_EMAIL
 
 INCLUDE https://github.com/s-daveb/ip6jail.template
 
+cp etc /
 CP usr /
 RENDER /usr/local/etc/lighttpd-proxy.conf
 
